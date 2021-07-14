@@ -1,27 +1,31 @@
-# Vue 3 + Typescript + Vite
+# vue-share-popper
 
-This template should help get you started developing with Vue 3 and Typescript in Vite.
+This project is inspired by [need-more-share2](https://github.com/revir/need-more-share2), I created a brand new version about social network sharing with Vue and popper.js, you can easily create a social share popup in your project.
 
-## Recommended IDE Setup
+IMPORTANT: THIS PROJECT IS STILL WORKING IN PROGRESS, IT IS UNSTABLE NOW.
 
-[VSCode](https://code.visualstudio.com/) + [Vetur](https://marketplace.visualstudio.com/items?itemName=octref.vetur). Make sure to enable `vetur.experimental.templateInterpolationService` in settings!
+## Usage
 
-### If Using `<script setup>`
+I've used `vue-demi` to support both Vue 2 and Vue 3, if you're using Vue 2, please make sure your project has installed `@vue/composition-api`.
 
-[`<script setup>`](https://github.com/vuejs/rfcs/pull/227) is a feature that is currently in RFC stage. To get proper IDE support for the syntax, use [Volar](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar) instead of Vetur (and disable Vetur).
+Then you need to install this package:
 
-## Type Support For `.vue` Imports in TS
+```bash
+npm install vue-share-popper
+# or
+yarn add vue-share-popper
+# or
+pnpm install vue-share-popper
+```
 
-Since TypeScript cannot handle type information for `.vue` imports, they are shimmed to be a generic Vue component type by default. In most cases this is fine if you don't really care about component prop types outside of templates. However, if you wish to get actual prop types in `.vue` imports (for example to get props validation when using manual `h(...)` calls), you can use the following:
+The project finally exported an API called `useSharePopup`, you can use it to create a popup in your project, see more details in the reference section.
 
-### If Using Volar
+If you want to join our developement and make this project further, note that we're using `pnpm` in this project, please be sure you've installed it globally.
 
-Run `Volar: Switch TS Plugin on/off` from VSCode command palette.
+## Reference
 
-### If Using Vetur
+WIP
 
-1. Install and add `@vuedx/typescript-plugin-vue` to the [plugins section](https://www.typescriptlang.org/tsconfig#plugins) in `tsconfig.json`
-2. Delete `src/shims-vue.d.ts` as it is no longer needed to provide module info to Typescript
-3. Open `src/main.ts` in VSCode
-4. Open the VSCode command palette
-5. Search and run "Select TypeScript version" -> "Use workspace version"
+## License
+
+MIT
