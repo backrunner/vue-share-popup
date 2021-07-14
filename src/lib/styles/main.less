@@ -1,0 +1,32 @@
+@popup-height: 3.25rem;
+
+.vue-share-popup {
+  width: max-content;
+  height: @popup-height;
+  display: flex;
+  box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.125);
+  transition: opacity 100ms ease;
+  &__item {
+    width: @popup-height;
+    height: @popup-height;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 50ms ease;
+    svg {
+      width: 1.5rem;
+      height: 1.5rem;
+      path {
+        fill: #fcfdfd;
+      }
+    }
+  }
+  &__item:hover {
+    opacity: 0.75;
+  }
+}
+
+.vue-share-popup--hide {
+  opacity: 0;
+}

@@ -1,8 +1,12 @@
-import { defineComponent, PropType, h } from 'vue-demi';
+import { defineComponent, PropType, ref, h, provide } from 'vue-demi';
 import { SocialPlatforms } from '../types/enums';
+import { ShareProps } from './utils';
 import platforms from './platforms';
+import './styles/main.less';
 
 const NAME = 'VueSharePopper';
+
+export const visibility = ref(false);
 
 export default defineComponent({
   name: NAME,
@@ -11,8 +15,18 @@ export default defineComponent({
       type: Array as PropType<SocialPlatforms[]>,
       required: true,
     },
+    meta: {
+      type: Object as PropType<ShareProps>,
+      required: true,
+    },
+    zIndex: {
+      type: Number,
+      required: true,
+    },
   },
   setup(props) {
+    // provide
+    provide('shareProps', props.meta);
     // generate childs by "socials" prop
     const children = props.socials.map((social) => {
       return h(platforms[social]);
@@ -22,6 +36,10 @@ export default defineComponent({
         'div',
         {
           class: 'vue-share-popup',
+          style: {
+            display: visibility.value ? null : 'none',
+            'z-index': props.zIndex,
+          },
         },
         children,
       );

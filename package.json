@@ -13,6 +13,7 @@
     "f2elint-fix": "f2elint fix"
   },
   "dependencies": {
+    "@popperjs/core": "^2.9.2",
     "vue-demi": "^0.10.1"
   },
   "peerDependencies": {
@@ -28,6 +29,7 @@
     "@vitejs/plugin-vue": "^1.2.5",
     "@vue/compiler-sfc": "^3.0.5",
     "f2elint": "^1.2.0",
+    "less": "^4.1.1",
     "typescript": "^4.3.5",
     "vite": "^2.4.2",
     "vue": "^3.0.5",

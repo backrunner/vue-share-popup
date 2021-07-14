@@ -4,3 +4,8 @@ export enum SocialPlatforms {
   WECHAT = 'wechat',
   TWITTER = 'twitter',
 }
+
+export enum PopTrigger {
+  HOVER = 'hover',
+  CLICK = 'click',
+}
