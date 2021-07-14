@@ -1,4 +1,4 @@
-import { createApp } from 'vue-demi';
+import { App, createApp, onUnmounted } from 'vue-demi';
 import { createPopper } from '@popperjs/core/lib/popper-lite';
 import { Placement } from '@popperjs/core/lib/enums';
 import { ShareProps } from './utils';
@@ -11,7 +11,7 @@ import sharePopup, { visibility as popupVisibility } from './share-popup';
 interface SharePopupProps {
   platforms: SocialPlatforms[];
   meta: ShareProps;
-  target: HTMLElement;
+  ref: HTMLElement;
   trigger: PopTrigger;
   placement: Placement;
   zIndex?: number;
@@ -21,18 +21,23 @@ const HIDE_DELAY = 100;
 const HIDE_CLASS_NAME = 'vue-share-popup--hide';
 
 export const useSharePopup = (props: SharePopupProps) => {
-  // create mountTarget
-  const wrapper = document.createElement('div');
+  // before mount
+  let popupRoot: App<Element>;
+  onUnmounted(() => {
+    popupRoot && popupRoot.unmount();
+  });
   // mount popup
-  const popupInstance = createApp(sharePopup, {
+  const wrapper = document.createElement('div');
+  popupRoot = createApp(sharePopup, {
     socials: props.platforms,
     meta: props.meta,
     zIndex: props.zIndex || 2000,
-  }).mount(wrapper);
-  const popupEl: Element = wrapper.children[0];
+  });
+  const popupIns = popupRoot.mount(wrapper);
+  const popupEl = wrapper.children[0];
   document.body.appendChild(popupEl);
   // create popper
-  const popper = createPopper(props.target, popupInstance.$el, {
+  const popper = createPopper(props.ref, popupIns.$el, {
     placement: props.placement,
     modifiers: [
       {
@@ -83,9 +88,9 @@ export const useSharePopup = (props: SharePopupProps) => {
       showEvent.stopPropagation();
     };
     // add event listener to target
-    props.target.addEventListener('mousedown', showOnClick);
+    props.ref.addEventListener('mousedown', showOnClick);
   } else if (props.trigger === PopTrigger.HOVER) {
-    const elements = [props.target, popupEl];
+    const elements = [props.ref, popupEl];
     const showEvents = ['mouseenter', 'focus'];
     const hideEvents = ['mouseleave', 'blur'];
     // wrap methods
@@ -126,5 +131,5 @@ export const useSharePopup = (props: SharePopupProps) => {
     });
   }
 
-  return { instance: popupInstance, el: popupEl };
+  return { instance: popupRoot, el: popupEl };
 };
