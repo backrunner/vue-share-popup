@@ -1,6 +1,8 @@
 # vue-share-popper
 
-This project is inspired by [need-more-share2](https://github.com/revir/need-more-share2), I created a brand new version about social network sharing with Vue and popper.js, you can easily create a social share popup in your project.
+This is an useful tool about social network sharing based on Vue and popper.js, you can easily create a social share popup in your project.
+
+This project is inspired by [need-more-share2](https://github.com/revir/need-more-share2).
 
 IMPORTANT: THIS PROJECT IS STILL WORKING IN PROGRESS, IT IS UNSTABLE NOW.
 
