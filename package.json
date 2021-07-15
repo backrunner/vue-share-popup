@@ -12,7 +12,8 @@
     }
   },
   "files": [
-    "dist"
+    "dist",
+    "dist-bundled"
   ],
   "description": "Quickly create a social share popup with Vue.",
   "version": "0.1.0",
