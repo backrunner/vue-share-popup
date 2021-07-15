@@ -1,7 +1,7 @@
 import { inject } from 'vue-demi';
 import { SocialPlatforms } from '../../types/enums';
 
-export interface ShareProps {
+interface ShareProps {
   url: string;
   title: string;
   desc?: string;
@@ -42,7 +42,7 @@ const openShare = (platform: SocialPlatforms, props: ShareProps) => {
   }
 };
 
-export const useOpenShare = (platform: SocialPlatforms) => {
+const useOpenShare = (platform: SocialPlatforms) => {
   const shareProps: ShareProps | undefined = inject('shareProps');
   const handleClick = () => {
     if (shareProps) {
@@ -54,3 +54,5 @@ export const useOpenShare = (platform: SocialPlatforms) => {
   };
   return handleClick;
 };
+
+export { ShareProps, useOpenShare };

@@ -1,7 +1,7 @@
 import { App, createApp, onUnmounted, ref } from 'vue-demi';
 import { createPopper } from '@popperjs/core/lib/popper-lite';
 import { Placement } from '@popperjs/core/lib/enums';
-import { ShareProps } from './utils';
+import type { ShareProps } from './utils/share';
 import { PopTrigger, SocialPlatforms } from '../types/enums';
 import preventOverflow from '@popperjs/core/lib/modifiers/preventOverflow';
 import offset from '@popperjs/core/lib/modifiers/offset';
@@ -35,9 +35,7 @@ const unmountPopup = (popupStore: SharePopupStore) => {
   });
 };
 
-export { SocialPlatforms, ShareProps, PopTrigger };
-
-export const useSharePopup = (props: SharePopupProps) => {
+const useSharePopup = (props: SharePopupProps) => {
   if (!props.ref) {
     // eslint-disable-next-line no-console
     console.error('Ref in props is null, cannot create share popup.');
@@ -200,3 +198,5 @@ export const useSharePopup = (props: SharePopupProps) => {
 
   return { root: popupRoot, instance: popupIns, el: popupEl, popper };
 };
+
+export { useSharePopup, SocialPlatforms, PopTrigger, ShareProps };
