@@ -4,20 +4,20 @@ specifiers:
   '@popperjs/core': ^2.9.2
   '@types/node': ^16.3.2
   '@vitejs/plugin-vue': ^1.2.5
-  '@vue/compiler-sfc': ^3.0.5
+  '@vue/compiler-sfc': 3.1.4
   cross-env: ^7.0.3
   f2elint: ^1.2.0
   less: ^4.1.1
   typescript: ^4.3.5
   vite: ^2.4.2
   vite-plugin-dts: ^0.5.2
-  vue: ^3.0.5
-  vue-demi: ^0.10.1
-  vue-tsc: ^0.0.24
+  vue: 3.1.4
+  vue-demi: ^0.11.0
+  vue-tsc: 0.0.25
 
 dependencies:
   '@popperjs/core': 2.9.2
-  vue-demi: 0.10.1_vue@3.1.4
+  vue-demi: 0.11.0_vue@3.1.4
 
 devDependencies:
   '@types/node': 16.3.2
@@ -30,7 +30,7 @@ devDependencies:
   vite: 2.4.2
   vite-plugin-dts: 0.5.2_vite@2.4.2
   vue: 3.1.4
-  vue-tsc: 0.0.24
+  vue-tsc: 0.0.25
 
 packages:
 
@@ -603,6 +603,10 @@ packages:
 
   /@types/unist/2.0.5:
     resolution: {integrity: sha512-wnra4Vw9dopnuybR6HBywJ/URYpYrKLoepBTEtgfJup8Ahoi2zJECPP2cwiXp7btTvOT2CULv87aQRA4eZSP6g==}
+    dev: true
+
+  /@types/unist/2.0.6:
+    resolution: {integrity: sha512-PBjIUxZHOuj0R15/xuwJYjFi+KZdNFrehocChv4g5hu6aFroHue8m0lBP0POdK2nKzbw0cgV1mws8+V/JAcEkQ==}
     dev: true
 
   /@typescript-eslint/eslint-plugin/3.10.1_44392d0f3bfdac53b1c970a89fdaeeef:
@@ -4099,8 +4103,8 @@ packages:
       glob: 7.1.7
     dev: true
 
-  /rollup/2.53.1:
-    resolution: {integrity: sha512-yiTCvcYXZEulNWNlEONOQVlhXA/hgxjelFSjNcrwAAIfYx/xqjSHwqg/cCaWOyFRKr+IQBaXwt723m8tCaIUiw==}
+  /rollup/2.53.2:
+    resolution: {integrity: sha512-1CtEYuS5CRCzFZ7SNW5528SlDlk4VDXIRGwbm/2POQxA/G4+7/crIqJwkmnj8Q/74hGx4oVlNvh4E1CJQ5hZ6w==}
     engines: {node: '>=10.0.0'}
     hasBin: true
     optionalDependencies:
@@ -4738,14 +4742,14 @@ packages:
   /vfile-message/2.0.4:
     resolution: {integrity: sha512-DjssxRGkMvifUOJre00juHoP9DPWuzjxKuMDrhNbk2TdaYYBNMStsNhEOt3idrtI12VQYM/1+iM0KOzXi4pxwQ==}
     dependencies:
-      '@types/unist': 2.0.5
+      '@types/unist': 2.0.6
       unist-util-stringify-position: 2.0.3
     dev: true
 
   /vfile/4.2.1:
     resolution: {integrity: sha512-O6AE4OskCG5S1emQ/4gl8zK586RqA3srz3nfK/Viy0UPToBc5Trp9BVFb1u0CjsKrAWwnpr4ifM/KBXPWwJbCA==}
     dependencies:
-      '@types/unist': 2.0.5
+      '@types/unist': 2.0.6
       is-buffer: 2.0.5
       unist-util-stringify-position: 2.0.3
       vfile-message: 2.0.4
@@ -4771,13 +4775,14 @@ packages:
       esbuild: 0.12.15
       postcss: 8.3.5
       resolve: 1.20.0
-      rollup: 2.53.1
+      rollup: 2.53.2
     optionalDependencies:
       fsevents: 2.3.2
     dev: true
 
-  /vue-demi/0.10.1_vue@3.1.4:
-    resolution: {integrity: sha512-L6Oi+BvmMv6YXvqv5rJNCFHEKSVu7llpWWJczqmAQYOdmPPw5PNYoz1KKS//Fxhi+4QP64dsPjtmvnYGo1jemA==}
+  /vue-demi/0.11.0_vue@3.1.4:
+    resolution: {integrity: sha512-fjMHzLh3KFMxC4gvSn3KLM9klh868ccj+lKfpyt/Y6LODVfHjL1hGtDrszV7B7saaHtOPVqboGPmqXKwcYwwTQ==}
+    engines: {node: '>=12'}
     hasBin: true
     requiresBuild: true
     peerDependencies:
@@ -4808,8 +4813,8 @@ packages:
       - supports-color
     dev: true
 
-  /vue-tsc/0.0.24:
-    resolution: {integrity: sha512-Qx0V7jkWMtvddtaWa1SA8YKkBCRmjq9zZUB2UIMZiso6JSH538oHD2VumSzkoDnAfFbY3t0/j1mB2abpA0bGWA==}
+  /vue-tsc/0.0.25:
+    resolution: {integrity: sha512-9cWIQxjoviLQE2o+8NVfycKeI6nlfPndTDvH9hhG2/5mQhixPYWzXgAjszLXa8pzLKnF3ZiAr/hrTxjIAai5+A==}
     hasBin: true
     dependencies:
       unzipper: 0.10.11
