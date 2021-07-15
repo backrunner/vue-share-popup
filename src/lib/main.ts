@@ -1,4 +1,4 @@
-import { App, createApp, onUnmounted } from 'vue-demi';
+import { App, createApp, onUnmounted, ref } from 'vue-demi';
 import { createPopper } from '@popperjs/core/lib/popper-lite';
 import { Placement } from '@popperjs/core/lib/enums';
 import { ShareProps } from './utils';
@@ -6,7 +6,7 @@ import { PopTrigger, SocialPlatforms } from '../types/enums';
 import preventOverflow from '@popperjs/core/lib/modifiers/preventOverflow';
 import offset from '@popperjs/core/lib/modifiers/offset';
 import flip from '@popperjs/core/lib/modifiers/flip';
-import sharePopup, { visibility as popupVisibility } from './share-popup';
+import sharePopup from './share-popup';
 
 interface SharePopupProps {
   platforms: SocialPlatforms[];
@@ -15,6 +15,7 @@ interface SharePopupProps {
   trigger: PopTrigger;
   placement: Placement;
   zIndex?: number;
+  popupEl?: HTMLElement;
 }
 
 const HIDE_DELAY = 100;
@@ -32,13 +33,15 @@ export const useSharePopup = (props: SharePopupProps) => {
   });
   // mount popup
   const wrapper = document.createElement('div');
+  const visibility = ref(false);
   popupRoot = createApp(sharePopup, {
     socials: props.platforms,
     meta: props.meta,
     zIndex: props.zIndex || 2000,
+    visibility,
   });
   const popupIns = popupRoot.mount(wrapper);
-  const popupEl = wrapper.children[0];
+  const popupEl = wrapper.children[0] as HTMLElement;
   document.body.appendChild(popupEl);
   // create popper
   const popper = createPopper(props.ref, popupIns.$el, {
@@ -65,11 +68,11 @@ export const useSharePopup = (props: SharePopupProps) => {
     ],
   });
   const show = () => {
-    popupVisibility.value = true;
+    visibility.value = true;
     popper.update();
   };
   const hide = () => {
-    popupVisibility.value = false;
+    visibility.value = false;
   };
   // setup trigger event listeners
   if (props.trigger === PopTrigger.CLICK) {
@@ -81,7 +84,7 @@ export const useSharePopup = (props: SharePopupProps) => {
       hide();
       document.documentElement.removeEventListener('mousedown', hideOnClickOutside);
     };
-    if (popupVisibility.value) {
+    if (popupIns.$options.methods.getVisibility()) {
       hide();
       document.documentElement.removeEventListener('mousedown', hideOnClickOutside);
       return;
@@ -158,5 +161,5 @@ export const useSharePopup = (props: SharePopupProps) => {
     });
   }
 
-  return { instance: popupRoot, el: popupEl };
+  return { root: popupRoot, instance: popupIns, el: popupEl, popper };
 };

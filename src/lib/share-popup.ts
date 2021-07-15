@@ -1,12 +1,10 @@
-import { defineComponent, PropType, ref, h, provide } from 'vue-demi';
+import { defineComponent, PropType, Ref, h, provide } from 'vue-demi';
 import { SocialPlatforms } from '../types/enums';
 import { ShareProps } from './utils';
 import platforms from './platforms';
 import './styles/main.less';
 
 const NAME = 'VueSharePopper';
-
-export const visibility = ref(false);
 
 export default defineComponent({
   name: NAME,
@@ -23,6 +21,10 @@ export default defineComponent({
       type: Number,
       required: true,
     },
+    visibility: {
+      type: Object as PropType<Ref<Boolean>>,
+      required: true,
+    },
   },
   setup(props) {
     // provide
@@ -37,7 +39,7 @@ export default defineComponent({
         {
           class: 'vue-share-popup',
           style: {
-            display: visibility.value ? null : 'none',
+            display: props.visibility.value ? null : 'none',
             'z-index': props.zIndex,
           },
         },
