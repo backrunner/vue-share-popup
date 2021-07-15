@@ -16,7 +16,6 @@ export interface SharePopupProps {
   trigger: PopTrigger;
   placement: Placement;
   zIndex?: number;
-  popupEl?: HTMLElement;
 }
 
 interface SharePopupStore {
@@ -36,7 +35,7 @@ const unmountPopup = (popupStore: SharePopupStore) => {
   });
 };
 
-export { SocialPlatforms, PopTrigger };
+export { SocialPlatforms, ShareProps, PopTrigger };
 
 export const useSharePopup = (props: SharePopupProps) => {
   if (!props.ref) {
