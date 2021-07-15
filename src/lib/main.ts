@@ -8,7 +8,7 @@ import offset from '@popperjs/core/lib/modifiers/offset';
 import flip from '@popperjs/core/lib/modifiers/flip';
 import sharePopup from './share-popup';
 
-interface SharePopupProps {
+export interface SharePopupProps {
   key?: string;
   platforms: SocialPlatforms[];
   meta: ShareProps;
@@ -35,6 +35,8 @@ const unmountPopup = (popupStore: SharePopupStore) => {
     cleaner.call(null);
   });
 };
+
+export { SocialPlatforms, PopTrigger };
 
 export const useSharePopup = (props: SharePopupProps) => {
   if (!props.ref) {
@@ -137,7 +139,7 @@ export const useSharePopup = (props: SharePopupProps) => {
     const showEvents = ['mouseenter', 'focus'];
     const hideEvents = ['mouseleave', 'blur'];
     // wrap methods
-    let hideTimeout: number | null;
+    let hideTimeout: NodeJS.Timeout | null;
     const enterShow = () => {
       if (hideTimeout) {
         clearTimeout(hideTimeout);

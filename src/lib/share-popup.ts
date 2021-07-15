@@ -2,7 +2,10 @@ import { defineComponent, PropType, Ref, h, provide } from 'vue-demi';
 import { SocialPlatforms } from '../types/enums';
 import { ShareProps } from './utils';
 import platforms from './platforms';
-import './styles/main.less';
+import styleInject from './utils/styleInject';
+import styles from './styles/main.less';
+
+styleInject(styles);
 
 const NAME = 'VueSharePopper';
 
