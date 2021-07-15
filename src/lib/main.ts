@@ -9,32 +9,61 @@ import flip from '@popperjs/core/lib/modifiers/flip';
 import sharePopup from './share-popup';
 
 interface SharePopupProps {
+  key?: string;
   platforms: SocialPlatforms[];
   meta: ShareProps;
-  ref: HTMLElement;
+  ref: HTMLElement | null;
   trigger: PopTrigger;
   placement: Placement;
   zIndex?: number;
   popupEl?: HTMLElement;
 }
 
+interface SharePopupStore {
+  root: App<Element>;
+  cleaners: Array<() => void>;
+}
+
 const HIDE_DELAY = 100;
 const HIDE_CLASS_NAME = 'vue-share-popup--hide';
 
+const store: Record<string, SharePopupStore> = {};
+
+const unmountPopup = (popupStore: SharePopupStore) => {
+  popupStore.root && popupStore.root.unmount();
+  popupStore.cleaners.forEach((cleaner) => {
+    cleaner.call(null);
+  });
+};
+
 export const useSharePopup = (props: SharePopupProps) => {
+  if (!props.ref) {
+    // eslint-disable-next-line no-console
+    console.error('Ref in props is null, cannot create share popup.');
+    return null;
+  }
+  // unmount prev instance if existed
+  if (props.key) {
+    const existed = !!store[props.key];
+    if (existed) {
+      unmountPopup(store[props.key]);
+      delete store[props.key];
+    }
+  }
   // before mount popup
   const sideEffectCleaners: Array<() => void> = [];
   let popupRoot: App<Element>;
   onUnmounted(() => {
-    popupRoot && popupRoot.unmount();
-    sideEffectCleaners.forEach((cleaner) => {
-      cleaner.call(null);
+    unmountPopup({
+      root: popupRoot,
+      cleaners: sideEffectCleaners,
     });
   });
   // mount popup
   const wrapper = document.createElement('div');
   const visibility = ref(false);
   popupRoot = createApp(sharePopup, {
+    identifier: props.key,
     socials: props.platforms,
     meta: props.meta,
     zIndex: props.zIndex || 2000,
@@ -159,6 +188,13 @@ export const useSharePopup = (props: SharePopupProps) => {
         props.ref.removeEventListener(eventName, delayHide);
       });
     });
+  }
+
+  if (props.key) {
+    store[props.key] = {
+      root: popupRoot,
+      cleaners: sideEffectCleaners,
+    };
   }
 
   return { root: popupRoot, instance: popupIns, el: popupEl, popper };

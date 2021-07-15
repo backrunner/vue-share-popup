@@ -9,6 +9,9 @@ const NAME = 'VueSharePopper';
 export default defineComponent({
   name: NAME,
   props: {
+    identifier: {
+      type: String,
+    },
     socials: {
       type: Array as PropType<SocialPlatforms[]>,
       required: true,
@@ -42,6 +45,12 @@ export default defineComponent({
             display: props.visibility.value ? null : 'none',
             'z-index': props.zIndex,
           },
+          ...(props.identifier
+            ? {
+                id: `vue-share-popup_${props.identifier}`,
+                'x-key': props.identifier,
+              }
+            : null),
         },
         children,
       );

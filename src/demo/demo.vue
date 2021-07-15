@@ -3,7 +3,7 @@
     <div class="title">
       <span>vue-share-popper</span>
     </div>
-    <div id="share-button">
+    <div id="share-button" ref="share">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -22,25 +22,36 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted } from 'vue';
+import { defineComponent, onMounted, onUpdated, ref } from 'vue';
 import { useSharePopup } from '../lib/main';
 import { PopTrigger, SocialPlatforms } from '../types/enums';
 
 export default defineComponent({
   setup() {
-    onMounted(() => {
-      const { QZONE, WEIBO, TWITTER } = SocialPlatforms;
-      useSharePopup({
-        platforms: [QZONE, WEIBO, TWITTER],
-        meta: {
-          title: 'vue-share-button',
-          url: 'pwp.app',
-        },
-        target: document.querySelector('#share-button')!,
-        trigger: PopTrigger.HOVER,
-        placement: 'bottom',
-      });
-    });
+    const share = ref(null);
+    const { QZONE, WEIBO, TWITTER } = SocialPlatforms;
+
+    const createSharePopup = () => {
+      share.value &&
+        useSharePopup({
+          key: 'share',
+          platforms: [QZONE, WEIBO, TWITTER],
+          meta: {
+            title: 'vue-share-button',
+            url: 'pwp.app',
+          },
+          ref: share.value,
+          trigger: PopTrigger.HOVER,
+          placement: 'bottom',
+        });
+    };
+
+    onMounted(createSharePopup);
+    onUpdated(createSharePopup);
+
+    return {
+      share,
+    };
   },
 });
 </script>
