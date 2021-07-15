@@ -90,6 +90,8 @@ Available values:
 
 Determine where should the popup layer be placed to the reference.
 
+IMPORTANT: This property is provided by `@popperjs/core`, we used `preventOverflow` and `flip` modifiers when creating the popper, so in some cases your `placement` may seems not work properly, it's normal.
+
 #### zIndex
 
 `zIndex`: `number` (Optional)
