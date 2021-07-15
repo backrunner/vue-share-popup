@@ -17,6 +17,14 @@
   ],
   "description": "Quickly create a social share popup with Vue.",
   "version": "0.1.0",
+  "homepage": "https://github.com/backrunner/vue-share-popper",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/backrunner/vue-share-popper.git"
+  },
+  "bugs": {
+    "url": "https://github.com/backrunner/vue-share-popper/issues"
+  },
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
