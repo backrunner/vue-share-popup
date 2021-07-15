@@ -21,10 +21,14 @@ const HIDE_DELAY = 100;
 const HIDE_CLASS_NAME = 'vue-share-popup--hide';
 
 export const useSharePopup = (props: SharePopupProps) => {
-  // before mount
+  // before mount popup
+  const sideEffectCleaners: Array<() => void> = [];
   let popupRoot: App<Element>;
   onUnmounted(() => {
     popupRoot && popupRoot.unmount();
+    sideEffectCleaners.forEach((cleaner) => {
+      cleaner.call(null);
+    });
   });
   // mount popup
   const wrapper = document.createElement('div');
@@ -69,26 +73,33 @@ export const useSharePopup = (props: SharePopupProps) => {
   };
   // setup trigger event listeners
   if (props.trigger === PopTrigger.CLICK) {
-    const showOnClick = (showEvent: MouseEvent) => {
-      const hideOnClickOutside = (hideEvent: MouseEvent) => {
-        const target = hideEvent.target as Node;
-        if (popupEl.contains(target)) {
-          return;
-        }
-        hide();
-        document.documentElement.removeEventListener('mousedown', hideOnClickOutside);
-      };
-      if (popupVisibility.value) {
-        hide();
-        document.documentElement.removeEventListener('mousedown', hideOnClickOutside);
+    const hideOnClickOutside = (hideEvent: MouseEvent) => {
+      const target = hideEvent.target as Node;
+      if (popupEl.contains(target)) {
         return;
       }
+      hide();
+      document.documentElement.removeEventListener('mousedown', hideOnClickOutside);
+    };
+    if (popupVisibility.value) {
+      hide();
+      document.documentElement.removeEventListener('mousedown', hideOnClickOutside);
+      return;
+    }
+    const showOnClick = (showEvent: MouseEvent) => {
       document.documentElement.addEventListener('mousedown', hideOnClickOutside);
       show();
       showEvent.stopPropagation();
     };
     // add event listener to target
     props.ref.addEventListener('mousedown', showOnClick);
+    // add side effect cleaner
+    sideEffectCleaners.push(() => {
+      if (props.ref) {
+        props.ref.removeEventListener('mousedown', showOnClick);
+      }
+      document.documentElement.removeEventListener('mousedown', hideOnClickOutside);
+    });
   } else if (props.trigger === PopTrigger.HOVER) {
     const elements = [props.ref, popupEl];
     const showEvents = ['mouseenter', 'focus'];
@@ -127,6 +138,22 @@ export const useSharePopup = (props: SharePopupProps) => {
     hideEvents.forEach((eventName) => {
       elements.forEach((el) => {
         el.addEventListener(eventName, delayHide);
+      });
+    });
+    // add side effect cleaner
+    sideEffectCleaners.push(() => {
+      if (hideTimeout) {
+        // release timer
+        clearTimeout(hideTimeout);
+        hideTimeout = null;
+      }
+      showEvents.forEach((eventName) => {
+        if (!props.ref) {
+          return;
+        }
+        // popup has been destroyed, only need to remove listeners on ref
+        props.ref.removeEventListener(eventName, enterShow);
+        props.ref.removeEventListener(eventName, delayHide);
       });
     });
   }
