@@ -8,8 +8,6 @@
         xmlns="http://www.w3.org/2000/svg"
         xmlns:xlink="http://www.w3.org/1999/xlink"
         aria-hidden="true"
-        role="img"
-        preserveAspectRatio="xMidYMid meet"
         viewBox="0 0 24 24"
       >
         <path
@@ -29,13 +27,13 @@ import { PopTrigger, SocialPlatforms } from '../types/enums';
 export default defineComponent({
   setup() {
     const share = ref(null);
-    const { QZONE, WEIBO, TWITTER, WECHAT } = SocialPlatforms;
+    const { QZONE, DOUBAN, WEIBO, TWITTER, WECHAT } = SocialPlatforms;
 
     const createSharePopup = () => {
       share.value &&
         useSharePopup({
           key: 'share',
-          platforms: [QZONE, WEIBO, TWITTER, WECHAT],
+          platforms: [QZONE, DOUBAN, WEIBO, TWITTER, WECHAT],
           meta: {
             title: 'vue-share-button',
             url: 'https://pwp.app',

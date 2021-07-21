@@ -27,6 +27,13 @@ const getShareUrl: Record<SocialPlatforms, (props: ShareProps) => string> = {
     image && (shareUrl += `&pic=${image}`);
     return shareUrl;
   },
+  [SocialPlatforms.DOUBAN]: (props) => {
+    let shareUrl = `https://www.douban.com/share/service?name=${props.title}&href=${props.url}`;
+    if (props.image) {
+      shareUrl += `&image=${props.image}`;
+    }
+    return shareUrl;
+  },
   [SocialPlatforms.WECHAT]: (props) => {
     const { wechatSharePage, title, url } = props;
     if (!wechatSharePage) {
