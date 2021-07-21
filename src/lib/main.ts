@@ -16,6 +16,11 @@ export interface SharePopupProps {
   trigger: PopTrigger;
   placement: Placement;
   zIndex?: number;
+  options?: SharePopupOptions;
+}
+
+export interface SharePopupOptions {
+  wechatSharePage?: string;
 }
 
 interface SharePopupStore {
@@ -49,6 +54,11 @@ const useSharePopup = (props: SharePopupProps) => {
       delete store[props.key];
     }
   }
+  // check wechat
+  if (props.platforms.includes(SocialPlatforms.WECHAT) && !props.options?.wechatSharePage) {
+    // eslint-disable-next-line no-console
+    console.error('The wechatSharePage property is empty, the wechat share button will not work!');
+  }
   // before mount popup
   const sideEffectCleaners: Array<() => void> = [];
   let popupRoot: App<Element>;
@@ -64,7 +74,10 @@ const useSharePopup = (props: SharePopupProps) => {
   popupRoot = createApp(sharePopup, {
     identifier: props.key,
     socials: props.platforms,
-    meta: props.meta,
+    meta: {
+      ...props.meta,
+      wechatSharePage: props.options?.wechatSharePage || '',
+    },
     zIndex: props.zIndex || 2000,
     visibility,
   });

@@ -6,6 +6,7 @@ interface ShareProps {
   title: string;
   desc?: string;
   image?: string;
+  wechatSharePage?: string;
 }
 
 const getShareUrl: Record<SocialPlatforms, (props: ShareProps) => string> = {
@@ -26,8 +27,14 @@ const getShareUrl: Record<SocialPlatforms, (props: ShareProps) => string> = {
     image && (shareUrl += `&pic=${image}`);
     return shareUrl;
   },
-  [SocialPlatforms.WECHAT]: () => {
-    return '';
+  [SocialPlatforms.WECHAT]: (props) => {
+    const { wechatSharePage, title, url } = props;
+    if (!wechatSharePage) {
+      // eslint-disable-next-line no-console
+      console.error('Wechat share page was not specified.');
+      return '';
+    }
+    return wechatSharePage.replace('{url}', url).replace('{title}', title);
   },
   [SocialPlatforms.TWITTER]: (props) => {
     const { title, url } = props;

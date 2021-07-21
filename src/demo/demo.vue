@@ -29,20 +29,23 @@ import { PopTrigger, SocialPlatforms } from '../types/enums';
 export default defineComponent({
   setup() {
     const share = ref(null);
-    const { QZONE, WEIBO, TWITTER } = SocialPlatforms;
+    const { QZONE, WEIBO, TWITTER, WECHAT } = SocialPlatforms;
 
     const createSharePopup = () => {
       share.value &&
         useSharePopup({
           key: 'share',
-          platforms: [QZONE, WEIBO, TWITTER],
+          platforms: [QZONE, WEIBO, TWITTER, WECHAT],
           meta: {
             title: 'vue-share-button',
-            url: 'pwp.app',
+            url: 'https://pwp.app',
           },
           ref: share.value,
           trigger: PopTrigger.HOVER,
           placement: 'bottom',
+          options: {
+            wechatSharePage: 'https://wechat-share.pwp.space/?url={url}&title={title}',
+          },
         });
     };
 

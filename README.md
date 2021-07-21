@@ -128,6 +128,22 @@ The description (or summary) of the page that will be shared.
 
 An image URL for sharing.
 
+#### options
+
+Options for share popup, see `SharePopupOptions` part for more details.
+
+### SharePopupOptions
+
+Options for share popup.
+
+#### wechatSharePage
+
+If you want to add `wechat` to the `platforms` array in the `SharePopupProps`, you need set this property neccessarily.
+
+The value should be a URL, it will determine the page which will guide user to share something in wechat.
+
+Example: `https://wechat-share.pwp.space/?url={url}&title={title}`
+
 ## License
 
 MIT
