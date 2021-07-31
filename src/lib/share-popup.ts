@@ -1,4 +1,4 @@
-import { defineComponent, PropType, Ref, h, provide } from 'vue-demi';
+import { PropType, Ref, h, provide } from 'vue-demi';
 import { SocialPlatforms } from '../types/enums';
 import { ShareProps } from './utils';
 import platforms from './platforms';
@@ -9,7 +9,7 @@ styleInject(styles);
 
 const NAME = 'VueSharePopper';
 
-export default defineComponent({
+export default {
   name: NAME,
   props: {
     identifier: {
@@ -32,11 +32,11 @@ export default defineComponent({
       required: true,
     },
   },
-  setup(props) {
+  setup(props: any) {
     // provide
     provide('shareProps', props.meta);
     // generate childs by "socials" prop
-    const children = props.socials.map((social) => {
+    const children = props.socials.map((social: SocialPlatforms) => {
       return h(platforms[social]);
     });
     return () =>
@@ -58,4 +58,4 @@ export default defineComponent({
         children,
       );
   },
-});
+};

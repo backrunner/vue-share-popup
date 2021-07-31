@@ -1,4 +1,4 @@
-import { App, createApp, onUnmounted, ref } from 'vue-demi';
+import { defineComponent, App, Vue2, createApp, onUnmounted, ref } from 'vue-demi';
 import { createPopper } from '@popperjs/core/lib/popper-lite';
 import { Placement } from '@popperjs/core/lib/enums';
 import type { ShareProps } from './utils/share';
@@ -61,7 +61,7 @@ const useSharePopup = (props: SharePopupProps) => {
   }
   // before mount popup
   const sideEffectCleaners: Array<() => void> = [];
-  let popupRoot: App<Element>;
+  let popupRoot: any;
   onUnmounted(() => {
     unmountPopup({
       root: popupRoot,
@@ -71,7 +71,7 @@ const useSharePopup = (props: SharePopupProps) => {
   // mount popup
   const wrapper = document.createElement('div');
   const visibility = ref(false);
-  popupRoot = createApp(sharePopup, {
+  const popupProps = {
     identifier: props.key,
     socials: props.platforms,
     meta: {
@@ -80,8 +80,16 @@ const useSharePopup = (props: SharePopupProps) => {
     },
     zIndex: props.zIndex || 2000,
     visibility,
-  });
-  const popupIns = popupRoot.mount(wrapper);
+  };
+  let popupIns: any;
+  if (Vue2) {
+    popupRoot = Vue2.extend(sharePopup)(popupProps);
+    popupIns = popupRoot.$mount(wrapper);
+  } else {
+    popupRoot = createApp(defineComponent(sharePopup), popupProps);
+    popupIns = popupRoot.mount(wrapper);
+  }
+
   const popupEl = wrapper.children[0] as HTMLElement;
   document.body.appendChild(popupEl);
   // create popper
