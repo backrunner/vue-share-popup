@@ -1,4 +1,4 @@
-import { PropType, Ref, h, provide } from 'vue-demi';
+import { defineComponent, PropType, Ref, h, provide } from 'vue-demi';
 import { SocialPlatforms } from '../types/enums';
 import { ShareProps } from './utils';
 import platforms from './platforms';
@@ -9,7 +9,7 @@ styleInject(styles);
 
 const NAME = 'VueSharePopper';
 
-export default {
+export default defineComponent({
   name: NAME,
   props: {
     identifier: {
@@ -58,4 +58,4 @@ export default {
         children,
       );
   },
-};
+});

@@ -1,4 +1,4 @@
-import { defineComponent, App, Vue2, createApp, onUnmounted, ref } from 'vue-demi';
+import { App, Vue2, createApp, onUnmounted, ref } from 'vue-demi';
 import { createPopper } from '@popperjs/core/lib/popper-lite';
 import { Placement } from '@popperjs/core/lib/enums';
 import type { ShareProps } from './utils/share';
@@ -86,7 +86,7 @@ const useSharePopup = (props: SharePopupProps) => {
     popupRoot = Vue2.extend(sharePopup)(popupProps);
     popupIns = popupRoot.$mount(wrapper);
   } else {
-    popupRoot = createApp(defineComponent(sharePopup), popupProps);
+    popupRoot = createApp(sharePopup, popupProps);
     popupIns = popupRoot.mount(wrapper);
   }
 
