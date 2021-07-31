@@ -10,7 +10,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent } from 'vue-demi';
 import { SocialPlatforms } from '../../types/enums';
 import { useOpenShare } from '../utils';
 
