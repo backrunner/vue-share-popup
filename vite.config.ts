@@ -38,10 +38,11 @@ const buildConfig: UserConfigExport =
             name: 'vue-share-popper',
           },
           rollupOptions: {
-            external: ['vue', '@popperjs/core'],
+            external: ['vue', 'vue-demi'],
             output: {
               globals: {
                 vue: 'Vue',
+                'vue-demi': 'vue-demi',
               },
             },
             plugins: [],
