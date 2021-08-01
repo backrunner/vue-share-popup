@@ -160,7 +160,7 @@ const useSharePopup = (props: SharePopupProps) => {
       hide();
       document.documentElement.removeEventListener('mousedown', hideOnClickOutside);
     };
-    if (popupIns.$options.methods.getVisibility()) {
+    if (popupIns.visibility.value) {
       hide();
       document.documentElement.removeEventListener('mousedown', hideOnClickOutside);
       return;
