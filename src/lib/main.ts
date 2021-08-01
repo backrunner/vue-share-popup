@@ -8,10 +8,17 @@ import offset from '@popperjs/core/lib/modifiers/offset';
 import flip from '@popperjs/core/lib/modifiers/flip';
 import sharePopup from './share-popup';
 
+interface ShareMeta {
+  url: string;
+  title: string;
+  desc?: string;
+  image?: string;
+}
+
 export interface SharePopupProps {
   key?: string;
   platforms: SocialPlatforms[];
-  meta: ShareProps;
+  meta: ShareMeta;
   ref: HTMLElement | null;
   trigger: PopTrigger;
   placement: Placement;
