@@ -4,8 +4,6 @@ This is an useful tool about social network sharing based on Vue and popper.js, 
 
 This project is inspired by [need-more-share2](https://github.com/revir/need-more-share2).
 
-IMPORTANT: THIS PROJECT IS STILL WORKING IN PROGRESS, IT IS UNSTABLE NOW.
-
 ## Usage
 
 I've used `vue-demi` to support both Vue 2 and Vue 3, if you're using Vue 2, please make sure your project has installed `@vue/composition-api`.
