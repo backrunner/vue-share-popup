@@ -16,7 +16,7 @@ const getShareUrl: Record<SocialPlatforms, (props: ShareProps) => string> = {
       title,
     )}&url=${url}`;
     image && (shareUrl += `&pics=${image}`);
-    desc && (shareUrl += `&desc=${desc}`);
+    desc && (shareUrl += `&desc=${encodeURIComponent(desc)}`);
     return shareUrl;
   },
   [SocialPlatforms.WEIBO]: (props) => {
@@ -28,7 +28,9 @@ const getShareUrl: Record<SocialPlatforms, (props: ShareProps) => string> = {
     return shareUrl;
   },
   [SocialPlatforms.DOUBAN]: (props) => {
-    let shareUrl = `https://www.douban.com/share/service?name=${props.title}&href=${props.url}`;
+    let shareUrl = `https://www.douban.com/share/service?name=${encodeURIComponent(
+      props.title,
+    )}&href=${props.url}`;
     if (props.image) {
       shareUrl += `&image=${props.image}`;
     }
@@ -45,7 +47,7 @@ const getShareUrl: Record<SocialPlatforms, (props: ShareProps) => string> = {
   },
   [SocialPlatforms.TWITTER]: (props) => {
     const { title, url } = props;
-    return `https://twitter.com/intent/tweet?text=${title}&url=${url}`;
+    return `https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${url}`;
   },
 };
 
