@@ -146,7 +146,11 @@ If you want to add `wechat` to the `platforms` array in the `SharePopupProps`, y
 
 The value should be a URL, it will determine the page which will guide user to share something in wechat.
 
-Example: `https://wechat-share.pwp.space/?url={url}&title={title}`
+Example: `https://YOUR_SHARE_PAGE/index.html?url={url}&title={title}`
+
+If you don't want to develope a wechat share page, you can take a look at this project:
+
+[wechat-share-page](https://github.com/pwp-app/wechat-share-page)
 
 ## License
 
