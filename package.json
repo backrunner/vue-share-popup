@@ -27,6 +27,7 @@
   },
   "scripts": {
     "dev": "vite",
+    "dist": "npm run build && npm run build:bundle",
     "build": "vue-tsc --noEmit && vite build",
     "build:bundle": "vue-tsc --noEmit && cross-env BUILD_BUNDLE=true vite build",
     "serve": "vite preview",
