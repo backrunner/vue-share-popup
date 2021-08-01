@@ -43,7 +43,9 @@ const getShareUrl: Record<SocialPlatforms, (props: ShareProps) => string> = {
       console.error('Wechat share page was not specified.');
       return '';
     }
-    return wechatSharePage.replace('{url}', url).replace('{title}', title);
+    return wechatSharePage
+      .replace('{url}', encodeURIComponent(url))
+      .replace('{title}', encodeURIComponent(title));
   },
   [SocialPlatforms.TWITTER]: (props) => {
     const { title, url } = props;
