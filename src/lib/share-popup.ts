@@ -1,4 +1,5 @@
-import { defineComponent, PropType, Ref, h, provide } from 'vue-demi';
+import { defineComponent, PropType, Ref, provide } from 'vue-demi';
+import h from './utils/h-demi';
 import { SocialPlatforms } from '../types/enums';
 import { ShareProps } from './utils';
 import platforms from './platforms';
@@ -50,8 +51,9 @@ export default defineComponent({
           },
           ...(props.identifier
             ? {
-                id: `vue-share-popup_${props.identifier}`,
-                'x-key': props.identifier,
+                domProps: {
+                  id: `vue-share-popup_${props.identifier}`,
+                },
               }
             : null),
         },

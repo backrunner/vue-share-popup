@@ -16,7 +16,7 @@
     "dist-bundled"
   ],
   "description": "Quickly create a social share popup with Vue.",
-  "version": "0.2.7",
+  "version": "0.2.11",
   "homepage": "https://github.com/backrunner/vue-share-popup",
   "repository": {
     "type": "git",

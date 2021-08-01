@@ -33,6 +33,8 @@ const buildConfig: UserConfigExport =
           exclude: ['vue-demi'],
         },
         build: {
+          sourcemap: true,
+          minify: false,
           lib: {
             entry: path.resolve(__dirname, './src/lib/main.ts'),
             name: 'vue-share-popup',

@@ -1,4 +1,4 @@
-import { App, Vue2, createApp, onUnmounted, ref } from 'vue-demi';
+import { Vue2, isVue2, isVue3, createApp, onUnmounted, ref } from 'vue-demi';
 import { createPopper } from '@popperjs/core/lib/popper-lite';
 import { Placement } from '@popperjs/core/lib/enums';
 import type { ShareProps } from './utils/share';
@@ -24,7 +24,9 @@ export interface SharePopupOptions {
 }
 
 interface SharePopupStore {
-  root: App<Element>;
+  root?: any;
+  ins?: any;
+  key: string | undefined;
   cleaners: Array<() => void>;
 }
 
@@ -34,7 +36,17 @@ const HIDE_CLASS_NAME = 'vue-share-popup--hide';
 const store: Record<string, SharePopupStore> = {};
 
 const unmountPopup = (popupStore: SharePopupStore) => {
-  popupStore.root && popupStore.root.unmount();
+  if (isVue2) {
+    popupStore.ins && popupStore.ins.$destroy();
+    if (popupStore.key) {
+      const el = document.querySelector(`#vue-share-popup_${popupStore.key}`);
+      if (el) {
+        el.parentNode?.removeChild(el);
+      }
+    }
+  } else {
+    popupStore.root && popupStore.root.unmount();
+  }
   popupStore.cleaners.forEach((cleaner) => {
     cleaner.call(null);
   });
@@ -62,12 +74,17 @@ const useSharePopup = (props: SharePopupProps) => {
   // before mount popup
   const sideEffectCleaners: Array<() => void> = [];
   let popupRoot: any;
-  onUnmounted(() => {
-    unmountPopup({
-      root: popupRoot,
-      cleaners: sideEffectCleaners,
+  let popupIns: any;
+  if (isVue3) {
+    onUnmounted(() => {
+      unmountPopup({
+        root: popupRoot,
+        ins: popupIns,
+        key: props.key,
+        cleaners: sideEffectCleaners,
+      });
     });
-  });
+  }
   // mount popup
   const wrapper = document.createElement('div');
   const visibility = ref(false);
@@ -81,16 +98,19 @@ const useSharePopup = (props: SharePopupProps) => {
     zIndex: props.zIndex || 2000,
     visibility,
   };
-  let popupIns: any;
   if (Vue2) {
-    popupRoot = Vue2.extend(sharePopup)(popupProps);
+    document.body.appendChild(wrapper);
+    const PopupConstructor = Vue2.extend(sharePopup);
+    popupRoot = new PopupConstructor({
+      propsData: popupProps,
+    });
     popupIns = popupRoot.$mount(wrapper);
   } else {
     popupRoot = createApp(sharePopup, popupProps);
     popupIns = popupRoot.mount(wrapper);
   }
 
-  const popupEl = wrapper.children[0] as HTMLElement;
+  const popupEl = popupIns.$el;
   document.body.appendChild(popupEl);
   // create popper
   const popper = createPopper(props.ref, popupIns.$el, {
@@ -213,6 +233,8 @@ const useSharePopup = (props: SharePopupProps) => {
   if (props.key) {
     store[props.key] = {
       root: popupRoot,
+      ins: popupIns,
+      key: props.key,
       cleaners: sideEffectCleaners,
     };
   }
