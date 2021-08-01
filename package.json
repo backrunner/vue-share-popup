@@ -1,14 +1,14 @@
 {
-  "name": "vue-share-popper",
+  "name": "vue-share-popup",
   "author": {
     "name": "BackRunner"
   },
-  "main": "./dist/vue-share-popper.umd.js",
-  "module": "./dist/vue-share-popper.es.js",
+  "main": "./dist/vue-share-popup.umd.js",
+  "module": "./dist/vue-share-popup.es.js",
   "exports": {
     ".": {
-      "import": "./dist/vue-share-popper.es.js",
-      "require": "./dist/vue-share-popper.umd.js"
+      "import": "./dist/vue-share-popup.es.js",
+      "require": "./dist/vue-share-popup.umd.js"
     }
   },
   "files": [
@@ -16,14 +16,14 @@
     "dist-bundled"
   ],
   "description": "Quickly create a social share popup with Vue.",
-  "version": "0.2.5",
-  "homepage": "https://github.com/backrunner/vue-share-popper",
+  "version": "0.2.7",
+  "homepage": "https://github.com/backrunner/vue-share-popup",
   "repository": {
     "type": "git",
-    "url": "https://github.com/backrunner/vue-share-popper.git"
+    "url": "https://github.com/backrunner/vue-share-popup.git"
   },
   "bugs": {
-    "url": "https://github.com/backrunner/vue-share-popper/issues"
+    "url": "https://github.com/backrunner/vue-share-popup/issues"
   },
   "scripts": {
     "dev": "vite",

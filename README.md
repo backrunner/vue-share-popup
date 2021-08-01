@@ -1,4 +1,4 @@
-# vue-share-popper
+# vue-share-popup
 
 This is an useful tool about social network sharing based on Vue and popper.js, you can easily create a social share popup in your project.
 
@@ -13,11 +13,11 @@ I've used `vue-demi` to support both Vue 2 and Vue 3, if you're using Vue 2, ple
 Then you need to install this package:
 
 ```bash
-npm install vue-share-popper
+npm install vue-share-popup
 # or
-yarn add vue-share-popper
+yarn add vue-share-popup
 # or
-pnpm install vue-share-popper
+pnpm install vue-share-popup
 ```
 
 The project finally exported an API called `useSharePopup`, you can use it to create a popup in your project, see more details in the reference section.

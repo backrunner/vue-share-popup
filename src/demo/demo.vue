@@ -1,7 +1,7 @@
 <template>
   <div class="demo">
     <div class="title">
-      <span>vue-share-popper</span>
+      <span>vue-share-popup</span>
     </div>
     <div id="share-button" ref="share">
       <svg

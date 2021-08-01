@@ -14,7 +14,7 @@ const buildConfig: UserConfigExport =
           outDir: 'dist-bundled',
           lib: {
             entry: path.resolve(__dirname, './src/lib/entry-bundle.ts'),
-            name: 'vue-share-popper',
+            name: 'vue-share-popup',
             formats: ['iife'],
           },
           rollupOptions: {
@@ -35,7 +35,7 @@ const buildConfig: UserConfigExport =
         build: {
           lib: {
             entry: path.resolve(__dirname, './src/lib/main.ts'),
-            name: 'vue-share-popper',
+            name: 'vue-share-popup',
           },
           rollupOptions: {
             external: ['vue', 'vue-demi'],
