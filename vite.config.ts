@@ -57,6 +57,15 @@ if (process.env.BUILD_PLATFORMS === 'true') {
       },
     },
   };
+} else if (process.env.BUILD_DEMO === 'true') {
+  buildConfig = {
+    plugins: [vue()],
+    build: {
+      outDir: 'dist-demo',
+      sourcemap: false,
+      minify: true,
+    },
+  };
 } else {
   buildConfig = {
     plugins: [vue(), dts()],
