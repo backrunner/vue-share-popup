@@ -4,10 +4,6 @@ import wechat from './wechat';
 import weibo from './weibo';
 import douban from './douban';
 
-export default {
-  qzone,
-  twitter,
-  wechat,
-  weibo,
-  douban,
-};
+export { qzone, twitter, wechat, weibo, douban };
+
+export type SocialPlatformComp = typeof qzone;

@@ -1,8 +1,7 @@
 import { defineComponent, PropType, Ref, provide } from 'vue-demi';
-import h from './utils/h-demi';
-import { SocialPlatforms } from '../types/enums';
 import { ShareProps } from './utils';
-import platforms from './platforms';
+import { SocialPlatformComp } from './platforms';
+import h from './utils/h-demi';
 import styleInject from './utils/styleInject';
 import styles from './styles/main.less';
 
@@ -16,8 +15,8 @@ export default defineComponent({
     identifier: {
       type: String,
     },
-    socials: {
-      type: Array as PropType<SocialPlatforms[]>,
+    platforms: {
+      type: Array as PropType<SocialPlatformComp[]>,
       required: true,
     },
     meta: {
@@ -36,9 +35,9 @@ export default defineComponent({
   setup(props: any) {
     // provide
     provide('shareProps', props.meta);
-    // generate childs by "socials" prop
-    const children = props.socials.map((social: SocialPlatforms) => {
-      return h(platforms[social]);
+    // generate childs by "platforms" prop
+    const children = props.platforms.map((comp: SocialPlatformComp) => {
+      return h(comp);
     });
     return () =>
       h(

@@ -4,7 +4,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title></title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <script src="file://H:\Works\vue-share-popup\dist-bundled\vue-share-popup.iife.js"></script>
+    <script src="file://H:\Works\vue-share-popper\bundle\vue-share-popup.bundle.js"></script>
   </head>
   <body>
     <div id="app">
@@ -31,9 +31,10 @@
     </div>
   </body>
   <script>
+    const { qzone, wechat, douban, weibo } = window.sharePopupComps;
     window.useSharePopup({
       key: 'share',
-      platforms: ['qzone', 'weibo', 'twitter'],
+      platforms: [qzone, wechat, douban, weibo],
       meta: {
         title: 'vue-share-button',
         url: 'pwp.app',
@@ -41,6 +42,9 @@
       ref: document.querySelector('#share-button'),
       trigger: 'hover',
       placement: 'bottom',
+      options: {
+        wechatSharePage: 'https://wechat-share.pwp.space/?url={url}&title={title}',
+      },
     });
   </script>
   <style>

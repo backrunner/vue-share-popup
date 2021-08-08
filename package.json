@@ -13,10 +13,11 @@
   },
   "files": [
     "dist",
-    "dist-bundled"
+    "bundle",
+    "platforms"
   ],
   "description": "Quickly create a social share popup with Vue.",
-  "version": "0.3.3",
+  "version": "0.4.0",
   "homepage": "https://github.com/backrunner/vue-share-popup",
   "repository": {
     "type": "git",
@@ -30,6 +31,7 @@
     "dist": "npm run build && npm run build:bundle",
     "build": "vue-tsc --noEmit && vite build",
     "build:bundle": "vue-tsc --noEmit && cross-env BUILD_BUNDLE=true vite build",
+    "build:platforms": "vue-tsc --noEmit && cross-env BUILD_PLATFORMS=true vite build",
     "serve": "vite preview",
     "f2elint-scan": "f2elint scan",
     "f2elint-fix": "f2elint fix"

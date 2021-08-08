@@ -4,6 +4,7 @@ import { useOpenShare } from '../utils';
 import h from '../utils/h-demi';
 
 export default defineComponent({
+  name: SocialPlatforms.DOUBAN,
   setup() {
     const handleClick = useOpenShare(SocialPlatforms.DOUBAN);
     return () =>

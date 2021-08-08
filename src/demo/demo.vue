@@ -22,18 +22,18 @@
 <script lang="ts">
 import { defineComponent, onMounted, onUpdated, ref } from 'vue';
 import { useSharePopup } from '../lib/main';
-import { PopTrigger, SocialPlatforms } from '../types/enums';
+import { qzone, douban, weibo, wechat } from '../lib/platforms';
+import { PopTrigger } from '../types/enums';
 
 export default defineComponent({
   setup() {
     const share = ref(null);
-    const { QZONE, DOUBAN, WEIBO, TWITTER, WECHAT } = SocialPlatforms;
 
     const createSharePopup = () => {
       share.value &&
         useSharePopup({
           key: 'share',
-          platforms: [QZONE, DOUBAN, WEIBO, TWITTER, WECHAT],
+          platforms: [qzone, douban, weibo, wechat],
           meta: {
             title: 'vue-share-button',
             url: 'https://pwp.app',

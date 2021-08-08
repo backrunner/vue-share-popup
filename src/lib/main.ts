@@ -1,8 +1,9 @@
 import { Vue2, isVue2, isVue3, createApp, onUnmounted, ref } from 'vue-demi';
 import { createPopper } from '@popperjs/core/lib/popper-lite';
 import { Placement } from '@popperjs/core/lib/enums';
-import type { ShareProps } from './utils/share';
 import { PopTrigger, SocialPlatforms } from '../types/enums';
+import type { ShareProps } from './utils/share';
+import type { SocialPlatformComp } from './platforms';
 import preventOverflow from '@popperjs/core/lib/modifiers/preventOverflow';
 import offset from '@popperjs/core/lib/modifiers/offset';
 import flip from '@popperjs/core/lib/modifiers/flip';
@@ -17,7 +18,7 @@ interface ShareMeta {
 
 export interface SharePopupProps {
   key?: string;
-  platforms: SocialPlatforms[];
+  platforms: SocialPlatformComp[];
   meta: ShareMeta;
   ref: HTMLElement | null;
   trigger: PopTrigger;
@@ -74,7 +75,8 @@ const useSharePopup = (props: SharePopupProps) => {
     }
   }
   // check wechat
-  if (props.platforms.includes(SocialPlatforms.WECHAT) && !props.options?.wechatSharePage) {
+  const wechatIncluded = !!props.platforms.find((item) => item.name === SocialPlatforms.WECHAT);
+  if (wechatIncluded && !props.options?.wechatSharePage) {
     // eslint-disable-next-line no-console
     console.error('The wechatSharePage property is empty, the wechat share button will not work!');
   }
@@ -97,7 +99,7 @@ const useSharePopup = (props: SharePopupProps) => {
   const visibility = ref(false);
   const popupProps = {
     identifier: props.key,
-    socials: props.platforms,
+    platforms: props.platforms,
     meta: {
       ...props.meta,
       wechatSharePage: props.options?.wechatSharePage || '',
