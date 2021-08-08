@@ -1,7 +1,5 @@
-node_modules
-.DS_Store
-dist
-*.local
 .history
-platforms
 bundle
+dist
+node_modules
+platforms
