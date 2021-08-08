@@ -30,7 +30,7 @@
     "dev": "vite",
     "dist": "npm run build && npm run build:bundle && npm run build:platforms",
     "build": "vue-tsc --noEmit && vite build",
-    "build:demo": "vue-tsc --noEmit && cross-env BUILD_DEMO=true vite build",
+    "build:demo": "vue-tsc --noEmit && cross-env BUILD_DEMO=true vite build --base=/vue-share-popup/",
     "build:bundle": "vue-tsc --noEmit && cross-env BUILD_BUNDLE=true vite build",
     "build:platforms": "vue-tsc --noEmit && cross-env BUILD_PLATFORMS=true vite build",
     "serve": "vite preview",
