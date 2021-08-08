@@ -30,6 +30,29 @@ If you want to join our developement and make this project further, note that we
 
 In `src/demo`, we provide some examples which shows how to use this package.
 
+For someone who want to use this package outside Vue, you should take a look at `src/demo/demo.html` (The bundle version build already packed a Vue 3 to run the popup).
+
+Here's a basic example when you import this package by ESM:
+
+```js
+import { useSharePopup } from 'vue-share-popup';
+import { qzone, weibo } from 'vue-share-popup/platform';
+
+const share = ref(null); // bind to an element in template
+
+useSharePopup({
+  key: 'share',
+  platforms: [qzone, weibo],
+  meta: {
+    title: 'vue-share-button',
+    url: 'https://pwp.app',
+  },
+  ref: share.value,
+  trigger: 'hover',
+  placement: 'bottom',
+});
+```
+
 ## Reference
 
 ### useSharePopup
@@ -48,9 +71,11 @@ If `useSharePopup` was called multiple times with a same key, method will check 
 
 #### platforms
 
-`platforms`: `'qzone' | 'weibo' | 'twitter'`
+`platforms`: `SocialPlatformComp[]`
 
 The platforms you want to display in the share popup, buttons will be displayed in the same order as your configured.
+
+The `SocialPlatformComp` can be imported from `vue-share-popup/platforms`, supported names contains `qzone`, `wechat`, `weibo`, `douban`, `twitter`.
 
 #### meta
 
