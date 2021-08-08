@@ -1,5 +1,6 @@
 .history
 bundle
 dist
+dist-demo
 node_modules
 platforms
