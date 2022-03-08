@@ -17,9 +17,8 @@ if (process.env.BUILD_PLATFORMS === 'true') {
       outDir: 'platforms',
       lib: {
         entry: path.resolve(__dirname, './src/lib/platforms/index.ts'),
-        name: 'vue-share-popup-platforms',
-        fileName: () => 'index.js',
-        formats: ['es'],
+        name: 'vue-share-popup/platforms',
+        fileName: (format: string) => `index.${format}.js`,
       },
       rollupOptions: {
         external: ['vue', 'vue-demi'],

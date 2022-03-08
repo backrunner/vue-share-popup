@@ -9,6 +9,10 @@
     ".": {
       "import": "./dist/vue-share-popup.es.js",
       "require": "./dist/vue-share-popup.umd.js"
+    },
+    "./platforms": {
+      "import": "./platforms/index.es.js",
+      "require": "./platforms/index.umd.js"
     }
   },
   "files": [
@@ -17,7 +21,7 @@
     "platforms"
   ],
   "description": "Quickly create a social share popup with Vue.",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "homepage": "https://github.com/backrunner/vue-share-popup",
   "repository": {
     "type": "git",
