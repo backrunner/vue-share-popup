@@ -1,12 +1,15 @@
 import { Vue2, isVue2, isVue3, createApp, onUnmounted, ref } from 'vue-demi';
 import { createPopper } from '@popperjs/core/lib/popper-lite';
 import { Placement } from '@popperjs/core/lib/enums';
-import { PopTrigger, SocialPlatforms } from '../types/enums';
-import type { ShareProps } from './utils/share';
-import type { SocialPlatformComp } from './platforms';
+
 import preventOverflow from '@popperjs/core/lib/modifiers/preventOverflow';
 import offset from '@popperjs/core/lib/modifiers/offset';
 import flip from '@popperjs/core/lib/modifiers/flip';
+
+import { PopTrigger, SocialPlatforms } from '../types/enums';
+import type { ShareProps } from './utils/share';
+import type { SocialPlatformComp } from './platforms';
+
 import sharePopup from './share-popup';
 
 interface ShareMeta {

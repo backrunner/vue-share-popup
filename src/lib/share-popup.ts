@@ -3,7 +3,7 @@ import { ShareProps } from './utils';
 import { SocialPlatformComp } from './platforms';
 import h from './utils/h-demi';
 import styleInject from './utils/styleInject';
-import styles from './styles/main.less';
+import styles from './styles/main.less?inline';
 
 styleInject(styles);
 

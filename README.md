@@ -10,7 +10,7 @@ This project is inspired by [need-more-share2](https://github.com/revir/need-mor
 
 ## Usage
 
-I've used `vue-demi` to support both Vue 2 and Vue 3, if you're using Vue 2, please make sure your project has installed `@vue/composition-api`.
+I've used `vue-demi` to support both Vue 2 and Vue 3, if you're using Vue 2, please make sure you're using Vue 2.7.
 
 Then you need to install this package:
 
